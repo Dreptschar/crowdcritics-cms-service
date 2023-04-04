@@ -1,0 +1,36 @@
+openapi: 3.0.0
+x-deploy:
+  spring:
+    artifact: cms-service-server
+    group: com.crowdcritics
+  java:
+    artifact: cms-service-client
+    group: com.crowdcritics
+info:
+  title: CMS Service
+  description: Example spec of the well known JSON Placeholder website
+  version: 0.0.1
+tags:
+  - name: cms-service
+paths:
+  /product/data/{serialNumber}:
+    get:
+      operationId: getProduct
+      tags:
+        - cms-service
+      parameters:
+        - in: path
+          required: true
+          name: serialNumber
+          schema:
+            type: string
+            format: uuid
+      responses:
+        200:
+          description: successfully got data for product
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Product'
+
+

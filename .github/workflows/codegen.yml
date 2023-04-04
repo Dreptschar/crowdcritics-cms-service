@@ -1,0 +1,21 @@
+name: Deploy Libraries
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - 'api.yaml'
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: write-all
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: OpenAPI Generator
+        uses: tobicrain/openapi-gh-pkg@main
+        with:
+          SCHEMA_FILE_PATH: api.yaml
+          DEPLOY_TOKEN: ${{ secrets.GITHUB_TOKEN }}
